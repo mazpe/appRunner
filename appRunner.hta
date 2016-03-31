@@ -27,7 +27,6 @@
 			htmlString = htmlString & "<td>"& strDescription &"</td><td>" & strType & "</td>"
 
 			// Based on the step type is oging to do different things.
-
 			Select Case strType
 				Case "Install"
 					runFolder = objNode.SelectSingleNode("details/runFolder").text
