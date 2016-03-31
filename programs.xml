@@ -13,15 +13,15 @@
    <description>Running Batch File</description>
    <type>Execute</type>
    <details>
-     <runFolder>c:\staging\bin\xpos</runFolder>
+     <runFolder>c:\staging\bin\xpos\</runFolder>
      <runFile>programs.cmd</runFile>
    </details>
   </step>
   <step>
     <description>Uninstall POS .NET 1.1</description>
-    <type>ExecuteWithId</type>
+    <type>ExecuteInstallKey</type>
     <details>
-      <runFolder>cC:\Windows\System32</runFolder>
+      <runFolder>C:\Windows\System32</runFolder>
       <runFile>msiexec.exe</runFile>
       <installKey>{C05ED040-923C-4175-8B8D-A8693B93598B}</installKey>
       <commandLineExtra>/uninstall /quiet</commandLineExtra>
@@ -38,30 +38,29 @@
     </details>
   </step>
   <step>
-    <description>Uninstall PAR Ever Server 6000 driver</description>
-    <type>Uninstall</type>
+    <description>Uninstall PAR Ever Server 6000 Modules</description>
+    <type>ExecuteTarget</type>
     <details>
-      <installKey>PARDevDriversDeinstKey</installKey>
-      <writeParameter>PAR6000=1</writeParameter>
+      <runProgram>c:\windows\uninst.exe</runProgram>
+      <runTarget>"C:\program files\ParTech\ParOPOSModules\delsL1.isu"</runTarget>
+      <commandLineExtra>-f</commandLineExtra>
     </details>
   </step>
   <step>
-    <description>Uninstall PAR Ever Server 7000 driver</description>
-    <type>Uninstall</type>
+    <description>Uninstall PAR Ever Server 6000 Devices</description>
+    <type>ExecuteTarget</type>
     <details>
-      <installKey>{EFFBE92A-F35C-4963-B514-3EA840E49079}</installKey>
-      <keepVersionMajor>1</keepVersionMajor>
-      <keepVersionMinor>7</keepVersionMinor>
-      <keepDisplayVersion>1.7.2.0</keepDisplayVersion>
-      <writeParameter>PAR7000=1</writeParameter>
-      <commandLineReplace>/I|/x</commandLineReplace>
-      <commandLineExtra>/quiet</commandLineExtra>
+      <runProgram>c:\windows\uninst.exe</runProgram>
+      <runTarget>C:\program files\ParTech\ParOPOSModules\delsL1.is</runTarget>
+      <commandLineExtra>-y -f</commandLineExtra>
     </details>
   </step>
   <step>
     <description>Uninstall SQL Server 2005</description>
-    <type>Uninstall</type>
+    <type>ExecuteInstallKey</type>
     <details>
+      <runFolder>C:\Windows\System32</runFolder>
+      <runFile>msiexec.exe</runFile>
       <installKey>{B0F9497C-52B4-4686-8E73-74D866BBDF59}</installKey>
       <commandLineReplace>/I|/x</commandLineReplace>
     </details>

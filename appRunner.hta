@@ -28,11 +28,6 @@
 
 			// Based on the step type is oging to do different things.
 			Select Case strType
-				Case "Install"
-					runFolder 	= objNode.SelectSingleNode("details/runFolder").text
-					runFile 	= objNode.SelectSingleNode("details/runFile").text
-					cmd 		= runFolder & runFile
-					MsgBox "Execute: " & cmd
 				Case "Execute"
 					runFolder 			= objNode.SelectSingleNode("details/runFolder").text
 					runFile 			= objNode.SelectSingleNode("details/runFile").text
@@ -48,7 +43,7 @@
 
 					MsgBox "Execute: " & cmd
 
-				Case "ExecuteWithId"
+				Case "ExecuteInstallKey"
 					installKey 			= objNode.SelectSingleNode("details/installKey").text
 					runFolder 			= objNode.SelectSingleNode("details/runFolder").text
 					runFile 			= objNode.SelectSingleNode("details/runFile").text
@@ -61,7 +56,21 @@
 
 					cmd = runFolder & runFile & " " & commandLineExtra & " " & installKey
 
-					MsgBox "Execute With Id: " & cmd
+					MsgBox "Execute InstallKey: " & cmd
+
+				Case "ExecuteTarget"
+					runProgram 			= objNode.SelectSingleNode("details/runProgram").text
+					runTarget 			= objNode.SelectSingleNode("details/runTarget").text
+					//  check if the the step has extra command lines
+					If Not objNode.SelectSingleNode("details/commandLineExtra") Is Nothing Then
+						commandLineExtra 	= objNode.SelectSingleNode("details/commandLineExtra").text
+					Else
+						commandLineExtra 	= ""
+					End If
+
+					cmd = runProgram & " " & commandLineExtra & " " & runTarget
+
+					MsgBox "Execute Target: " & cmd
 
 				Case Else
 
