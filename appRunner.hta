@@ -29,27 +29,46 @@
 			// Based on the step type is oging to do different things.
 			Select Case strType
 				Case "Install"
-					runFolder = objNode.SelectSingleNode("details/runFolder").text
-					runFile = objNode.SelectSingleNode("details/runFile").text
-					cmd = runFolder &"/"& runFile
+					runFolder 	= objNode.SelectSingleNode("details/runFolder").text
+					runFile 	= objNode.SelectSingleNode("details/runFile").text
+					cmd 		= runFolder &"/"& runFile
 					MsgBox "Execute: " & cmd
 				Case "StopService"
-					serviceName = objNode.SelectSingleNode("details/serviceName").text
-					processName = objNode.SelectSingleNode("details/processName").text
+					serviceName 		= objNode.SelectSingleNode("details/serviceName").text
+					processName 		= objNode.SelectSingleNode("details/processName").text
 					MsgBox "StopService: " & serviceName
 				Case "CloseProcess"
-					processName = objNode.SelectSingleNode("details/processName").text
+					processName 		= objNode.SelectSingleNode("details/processName").text
 					MsgBox "CloseProcess: " & processName
-				Case "Uninstall"
-					installKey = objNode.SelectSingleNode("details/installKey").text
-					MsgBox "Uninstall: " & installKey
+				Case "Execute"
+					runFolder 			= objNode.SelectSingleNode("details/runFolder").text
+					runFile 			= objNode.SelectSingleNode("details/runFile").text
+					If objNode.SelectSingleNode("details/commandLineExtra") Then
+						commandLineExtra 	= objNode.SelectSingleNode("details/commandLineExtra").text
+					Else
+						commandLineExtra 	= ""
+					End If
+
+					cmd = runFolder &"/"& runFile & "/" & installKey
+
+					MsgBox "Uninstall: " & cmd
+
+				Case "Execute With Id"
+					installKey 			= objNode.SelectSingleNode("details/installKey").text
+					runFolder 			= objNode.SelectSingleNode("details/runFolder").text
+					runFile 			= objNode.SelectSingleNode("details/runFile").text
+					commandLineExtra 	= objNode.SelectSingleNode("details/commandLineExtra").text
+
+					cmd = runFolder &"/"& runFile & "/" & installKey
+
+					MsgBox "Uninstall: " & cmd
 
 				Case Else
 
 			End Select
 
 			// Display the status... should probably setup a variable default to "pending" and
-			// when the process is executed set to "running" and if completed "completed". 
+			// when the process is executed set to "running" and if completed "completed".
 			// Define whether it was succesful or not.For now it will just say "done"
 			htmlString = htmlString & "<td>done</td>"
 
