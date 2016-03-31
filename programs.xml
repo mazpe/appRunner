@@ -1,4 +1,4 @@
-<?xml version='1.0'?> 
+<?xml version='1.0'?>
 <steps>
   <step>
     <description>Install Windows Installer 4.5</description>
@@ -42,7 +42,7 @@
     <type>Uninstall</type>
     <details>
       <installKey>PARDevDriversDeinstKey</installKey>
-      <writeParameter>PAR6000=1</writeParameter>    
+      <writeParameter>PAR6000=1</writeParameter>
     </details>
   </step>
   <step>
@@ -61,9 +61,9 @@
   <step>
     <description>Uninstall SQL Server 2005</description>
     <type>Uninstall</type>
-    <details>      
+    <details>
       <installKey>{B0F9497C-52B4-4686-8E73-74D866BBDF59}</installKey>
-      <commandLineReplace>/I|/x</commandLineReplace>             
+      <commandLineReplace>/I|/x</commandLineReplace>
     </details>
   </step>
 </steps>
