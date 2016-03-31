@@ -1,0 +1,95 @@
+<?xml version='1.0'?> 
+<steps>
+<step>
+    <description>Install Windows Installer 4.5</description>
+    <type>Install</type>
+    <details>
+      <installKey>KB942288-v3</installKey>
+      <runFolder>c:\staging\IssetupPrerequisites\WindowsInstaller45</runFolder>
+      <runFile>WindowsXP-KB942288-v3-x86.exe</runFile>
+    </details>
+  </step>
+  <step>
+    <description>Stop XPOS COM Redirector</description>
+    <type>StopService</type>
+    <details>      
+      <serviceName>XPOSCOMRedirector</serviceName>
+      <processName>XPOSCOMRedirectorService</processName>
+    </details>
+  </step>
+  <step>
+    <description>Stop XPOS Update Service</description>
+    <type>StopService</type>
+    <details>      
+      <serviceName>XPOSUpdate</serviceName>
+      <processName>XPOSUpdateService</processName>
+    </details>
+  </step>
+  <step>
+    <description>Stop XPOS Integration Service</description>
+    <type>StopService</type>
+    <details>      
+      <serviceName>XPOSIntegrationService</serviceName>
+      <processName>XPOSIntegrationService</processName>
+    </details>
+  </step>
+  <step>
+    <description>Stop XPOS Control Centre</description>
+    <type>CloseProcess</type>
+    <details>      
+      <processName>XPOSControlCentre</processName>
+    </details>
+  </step>
+  <step>
+    <description>Stop XPOS Application Centre</description>
+    <type>CloseProcess</type>
+    <details>      
+      <processName>XPOSApplicationCentre</processName>
+    </details>
+  </step>
+  <step>
+    <description>Uninstall POS .NET 1.1</description>
+    <type>Uninstall</type>
+    <details>      
+      <installKey>{C05ED040-923C-4175-8B8D-A8693B93598B}</installKey>
+      <commandLineExtra>/quiet</commandLineExtra>
+    </details>
+  </step>
+  <step>
+    <description>Uninstall EPOS OPOS ADK 2.5</description>
+    <type>Uninstall</type>
+    <details>      
+      <installKey>EPSON OPOS ADK</installKey>
+      <commandLineExtra>/s</commandLineExtra>
+    </details>
+  </step>
+  <step>
+    <description>Uninstall PAR Ever Server 6000 driver</description>
+    <type>Uninstall</type>
+    <details>
+      <installKey>PARDevDriversDeinstKey</installKey>
+      <writeParameter>PAR6000=1</writeParameter>    
+    </details>
+  </step>
+  <step>
+    <description>Uninstall PAR Ever Server 7000 driver</description>
+    <type>Uninstall</type>
+    <details>
+      <installKey>{EFFBE92A-F35C-4963-B514-3EA840E49079}</installKey>
+      <keepVersionMajor>1</keepVersionMajor>
+      <keepVersionMinor>7</keepVersionMinor>
+      <keepDisplayVersion>1.7.2.0</keepDisplayVersion>
+      <writeParameter>PAR7000=1</writeParameter>
+      <commandLineReplace>/I|/x</commandLineReplace>
+      <commandLineExtra>/quiet</commandLineExtra>
+    </details>
+  </step>
+  <step>
+    <description>Uninstall SQL Server 2005</description>
+    <type>Uninstall</type>
+    <details>      
+      <installKey>{B0F9497C-52B4-4686-8E73-74D866BBDF59}</installKey>
+      <commandLineReplace>/I|/x</commandLineReplace>             
+    </details>
+  </step>
+</steps>

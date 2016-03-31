@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>XML</title>
+	<HTA:APPLICATION
+        APPLICATIONNAME = "XPOS removal tool"
+    />
+</head>
+<script language="VBScript">
+	Sub Window_onLoad
+		Set xmlDoc = CreateObject("Microsoft.XMLDOM")
+		xmlDoc.Async = "False"
+		xmlDoc.Load("programs.xml")
+
+		strQuery = "/steps/step"
+
+		Set colNodes = xmlDoc.selectNodes( strQuery )
+
+		htmlString = "<table><tr><th>Description</th><th>Type</th><th>Status</th></tr>"
+
+		For Each objNode in colNodes
+
+			strDescription = objNode.SelectSingleNode("description").text
+			strType = objNode.SelectSingleNode("type").text
+
+			htmlString = htmlString & "<tr>"
+			htmlString = htmlString & "<td>"& strDescription &"</td><td>" & strType & "</td>"
+
+			// Based on the step type is oging to do different things.
+
+			Select Case strType
+				Case "Install"
+					runFolder = objNode.SelectSingleNode("details/runFolder").text
+					runFile = objNode.SelectSingleNode("details/runFile").text
+					cmd = runFolder &"/"& runFile
+					MsgBox "Execute: " & cmd
+				Case "StopService"
+					serviceName = objNode.SelectSingleNode("details/serviceName").text
+					processName = objNode.SelectSingleNode("details/processName").text
+					MsgBox "StopService: " & serviceName
+				Case "CloseProcess"
+					processName = objNode.SelectSingleNode("details/processName").text
+					MsgBox "CloseProcess: " & processName
+				Case "Uninstall"
+					installKey = objNode.SelectSingleNode("details/installKey").text
+					MsgBox "Uninstall: " & installKey
+
+				Case Else
+
+			End Select
+
+			// Display the status... should probably setup a variable default to "pending" and
+			// when the process is executed set to "running" and if completed "completed". 
+			// Define whether it was succesful or not.For now it will just say "done"
+			htmlString = htmlString & "<td>done</td>"
+
+			// Close the HTML row
+			htmlString = htmlString & "</tr>"
+
+			// Inject HTML as we make progress
+			DataArea.innerHTML = htmlString
+
+		Next
+
+		// Close the table
+		htmlString = htmlString & "</table>"
+
+		// Finalize our HTML injection
+		DataArea.innerHTML = htmlString
+	End Sub
+</script>
+
+<body>
+<div id="DataArea"></div>
+</body>
+
+</html>
