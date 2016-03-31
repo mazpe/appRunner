@@ -1,6 +1,6 @@
 <?xml version='1.0'?> 
 <steps>
-<step>
+  <step>
     <description>Install Windows Installer 4.5</description>
     <type>Install</type>
     <details>
@@ -10,47 +10,17 @@
     </details>
   </step>
   <step>
-    <description>Stop XPOS COM Redirector</description>
-    <type>StopService</type>
-    <details>      
-      <serviceName>XPOSCOMRedirector</serviceName>
-      <processName>XPOSCOMRedirectorService</processName>
-    </details>
-  </step>
-  <step>
-    <description>Stop XPOS Update Service</description>
-    <type>StopService</type>
-    <details>      
-      <serviceName>XPOSUpdate</serviceName>
-      <processName>XPOSUpdateService</processName>
-    </details>
-  </step>
-  <step>
-    <description>Stop XPOS Integration Service</description>
-    <type>StopService</type>
-    <details>      
-      <serviceName>XPOSIntegrationService</serviceName>
-      <processName>XPOSIntegrationService</processName>
-    </details>
-  </step>
-  <step>
-    <description>Stop XPOS Control Centre</description>
-    <type>CloseProcess</type>
-    <details>      
-      <processName>XPOSControlCentre</processName>
-    </details>
-  </step>
-  <step>
-    <description>Stop XPOS Application Centre</description>
-    <type>CloseProcess</type>
-    <details>      
-      <processName>XPOSApplicationCentre</processName>
-    </details>
-  </step>
-  <step>
+   <description>Running Batch File</description>
+   <type>Install</type>
+   <details>
+     <runFolder>c:\staging\bin\xpos\</runFolder>
+     <runFile>programs.cmd</runFile>
+   </details>
+ </step>
+   <step>
     <description>Uninstall POS .NET 1.1</description>
     <type>Uninstall</type>
-    <details>      
+    <details>
       <installKey>{C05ED040-923C-4175-8B8D-A8693B93598B}</installKey>
       <commandLineExtra>/quiet</commandLineExtra>
     </details>
