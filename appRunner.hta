@@ -26,6 +26,8 @@
 			htmlString = htmlString & "<tr>"
 			htmlString = htmlString & "<td>"& strDescription &"</td><td>" & strType & "</td>"
 
+			Dim cmd
+
 			// Based on the step type is oging to do different things.
 			Select Case strType
 				Case "Execute"
@@ -76,6 +78,10 @@
 
 			End Select
 
+			// Run Forset!
+			Set objShell = CreateObject("Wscript.Shell")
+	    	objShell.Run cmd
+
 			// Display the status... should probably setup a variable default to "pending" and
 			// when the process is executed set to "running" and if completed "completed".
 			// Define whether it was succesful or not.For now it will just say "done"
@@ -94,6 +100,7 @@
 
 		// Finalize our HTML injection
 		DataArea.innerHTML = htmlString
+
 	End Sub
 </script>
 
