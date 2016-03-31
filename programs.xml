@@ -2,7 +2,7 @@
 <steps>
   <step>
     <description>Install Windows Installer 4.5</description>
-    <type>Install</type>
+    <type>Execute</type>
     <details>
       <installKey>KB942288-v3</installKey>
       <runFolder>c:\staging\IssetupPrerequisites\WindowsInstaller45</runFolder>
@@ -11,24 +11,28 @@
   </step>
   <step>
    <description>Running Batch File</description>
-   <type>Install</type>
+   <type>Execute</type>
    <details>
-     <runFolder>c:\staging\bin\xpos\</runFolder>
+     <runFolder>c:\staging\bin\xpos</runFolder>
      <runFile>programs.cmd</runFile>
    </details>
- </step>
-   <step>
+  </step>
+  <step>
     <description>Uninstall POS .NET 1.1</description>
-    <type>Uninstall</type>
+    <type>ExecuteWithId</type>
     <details>
+      <runFolder>cC:\Windows\System32</runFolder>
+      <runFile>msiexec.exe</runFile>
       <installKey>{C05ED040-923C-4175-8B8D-A8693B93598B}</installKey>
-      <commandLineExtra>/quiet</commandLineExtra>
+      <commandLineExtra>/uninstall /quiet</commandLineExtra>
     </details>
   </step>
   <step>
     <description>Uninstall EPOS OPOS ADK 2.5</description>
-    <type>Uninstall</type>
-    <details>      
+    <type>Execute</type>
+    <details>
+      <runFolder>c:\progra~1\OPOS\Epson2\</runFolder>
+      <runFile>uninstaller.exe</runFile>
       <installKey>EPSON OPOS ADK</installKey>
       <commandLineExtra>/s</commandLineExtra>
     </details>

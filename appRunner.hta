@@ -31,37 +31,37 @@
 				Case "Install"
 					runFolder 	= objNode.SelectSingleNode("details/runFolder").text
 					runFile 	= objNode.SelectSingleNode("details/runFile").text
-					cmd 		= runFolder &"/"& runFile
+					cmd 		= runFolder & runFile
 					MsgBox "Execute: " & cmd
-				Case "StopService"
-					serviceName 		= objNode.SelectSingleNode("details/serviceName").text
-					processName 		= objNode.SelectSingleNode("details/processName").text
-					MsgBox "StopService: " & serviceName
-				Case "CloseProcess"
-					processName 		= objNode.SelectSingleNode("details/processName").text
-					MsgBox "CloseProcess: " & processName
 				Case "Execute"
 					runFolder 			= objNode.SelectSingleNode("details/runFolder").text
 					runFile 			= objNode.SelectSingleNode("details/runFile").text
-					If objNode.SelectSingleNode("details/commandLineExtra") Then
+
+					//  check if the the step has extra command lines
+					If Not objNode.SelectSingleNode("details/commandLineExtra") Is Nothing Then
 						commandLineExtra 	= objNode.SelectSingleNode("details/commandLineExtra").text
 					Else
 						commandLineExtra 	= ""
 					End If
 
-					cmd = runFolder &"/"& runFile & "/" & installKey
+					cmd = runFolder & runFile & " " & installKey
 
-					MsgBox "Uninstall: " & cmd
+					MsgBox "Execute: " & cmd
 
-				Case "Execute With Id"
+				Case "ExecuteWithId"
 					installKey 			= objNode.SelectSingleNode("details/installKey").text
 					runFolder 			= objNode.SelectSingleNode("details/runFolder").text
 					runFile 			= objNode.SelectSingleNode("details/runFile").text
-					commandLineExtra 	= objNode.SelectSingleNode("details/commandLineExtra").text
+					//  check if the the step has extra command lines
+					If Not objNode.SelectSingleNode("details/commandLineExtra") Is Nothing Then
+						commandLineExtra 	= objNode.SelectSingleNode("details/commandLineExtra").text
+					Else
+						commandLineExtra 	= ""
+					End If
 
-					cmd = runFolder &"/"& runFile & "/" & installKey
+					cmd = runFolder & runFile & " " & commandLineExtra & " " & installKey
 
-					MsgBox "Uninstall: " & cmd
+					MsgBox "Execute With Id: " & cmd
 
 				Case Else
 
